@@ -35,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        if (move != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move), 0.05f);
+        }
+
         controller.Move(move * (baseSpeed + speedBoost) * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && controller.isGrounded)
